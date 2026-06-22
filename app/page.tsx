@@ -1,18 +1,19 @@
 import { supabase } from '@/lib/supabaseClient';
 
 async function getData() {
-  const [{ data: news }, { data: events }, { data: businesses }] = await Promise.all([
+  const [{ data: news }, { data: events }, { data: businesses }, { data: jobs }] = await Promise.all([
     supabase.from('news_posts').select('*').order('published_at', { ascending: false }).limit(4),
     supabase.from('events').select('*').order('event_date', { ascending: true }).limit(3),
     supabase.from('businesses').select('*').order('created_at', { ascending: false }).limit(3),
+    supabase.from('jobs').select('*').order('created_at', { ascending: false }).limit(3),
   ]);
-  return { news: news || [], events: events || [], businesses: businesses || [] };
+  return { news: news || [], events: events || [], businesses: businesses || [], jobs: jobs || [] };
 }
 
 export const revalidate = 600; // refresh every 10 min
 
 export default async function Home() {
-  const { news, events, businesses } = await getData();
+  const { news, events, businesses, jobs } = await getData();
 
   return (
     <main>
@@ -61,6 +62,19 @@ export default async function Home() {
           <div className="card" key={b.id}>
             <h3>{b.name}</h3>
             <p>{b.category} &middot; {b.address}</p>
+          </div>
+        ))}
+      </section>
+      <section className="section">
+        <div className="section-label">Hiring Now</div>
+        <h2 className="section-title">Local Jobs</h2>
+        {jobs.length === 0 && (
+          <div className="empty">No jobs posted yet. <a href="/jobs">Post one free →</a></div>
+        )}
+        {jobs.map((j: any) => (
+          <div className="card" key={j.id}>
+            <h3>{j.title}</h3>
+            <p>{j.company} &middot; {j.location}</p>
           </div>
         ))}
       </section>
