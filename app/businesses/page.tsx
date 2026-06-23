@@ -22,7 +22,7 @@ export default function BusinessesPage() {
   };
 
   return (
-    <main>
+    <>
       <section className="section">
         <div className="section-label">Directory</div>
         <h2 className="section-title">Local Businesses</h2>
@@ -55,6 +55,6 @@ export default function BusinessesPage() {
           </form>
         )}
       </section>
-    </main>
+    </>
   );
 }

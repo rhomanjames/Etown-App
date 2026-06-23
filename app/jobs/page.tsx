@@ -22,7 +22,7 @@ export default function JobsPage() {
   };
 
   return (
-    <main>
+    <>
       <section className="section">
         <div className="section-label">Hiring Now</div>
         <h2 className="section-title">Job Board</h2>
@@ -61,6 +61,6 @@ export default function JobsPage() {
           </form>
         )}
       </section>
-    </main>
+    </>
   );
 }

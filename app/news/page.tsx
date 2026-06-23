@@ -10,7 +10,7 @@ export default async function NewsPage() {
     .limit(30);
 
   return (
-    <main>
+    <>
       <section className="section">
         <div className="section-label">Lizzie Today</div>
         <h2 className="section-title">All Local Updates</h2>
@@ -23,6 +23,6 @@ export default async function NewsPage() {
           </div>
         ))}
       </section>
-    </main>
+    </>
   );
 }

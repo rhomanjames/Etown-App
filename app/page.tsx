@@ -16,7 +16,7 @@ export default async function Home() {
   const { news, events, businesses, jobs } = await getData();
 
   return (
-    <main>
+    <>
       <div className="weather-strip">
         <span className="temp">75°</span>
         <span>Cloudy &middot; 45% chance of rain today &middot; Elizabethtown, KY</span>
@@ -78,6 +78,6 @@ export default async function Home() {
           </div>
         ))}
       </section>
-    </main>
+    </>
   );
 }

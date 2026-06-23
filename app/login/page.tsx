@@ -16,7 +16,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main>
+    <>
       <section className="section">
         <div className="section-label">Account</div>
         <h2 className="section-title">Log in to The Elizabethtown App</h2>
@@ -40,6 +40,6 @@ export default function LoginPage() {
           </form>
         )}
       </section>
-    </main>
+    </>
   );
 }

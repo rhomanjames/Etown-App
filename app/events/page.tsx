@@ -22,7 +22,7 @@ export default function EventsPage() {
   };
 
   return (
-    <main>
+    <>
       <section className="section">
         <div className="section-label">This Week</div>
         <h2 className="section-title">Events in Elizabethtown</h2>
@@ -55,6 +55,6 @@ export default function EventsPage() {
           </form>
         )}
       </section>
-    </main>
+    </>
   );
 }
