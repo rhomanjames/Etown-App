@@ -5,6 +5,7 @@ create table news_posts (
   title text not null,
   summary text,
   body text,
+  source_type text default 'news',
   published_at timestamptz default now()
 );
 
@@ -55,3 +56,6 @@ create policy "anyone can submit jobs" on jobs for insert with check (true);
 
 -- News posts: only you should insert (do this via Supabase dashboard or a service key in Make.com)
 -- No public insert policy added for news_posts on purpose.
+
+-- If you already ran this file before adding source_type, run just this line:
+-- alter table news_posts add column source_type text default 'news';

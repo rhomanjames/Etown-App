@@ -276,3 +276,27 @@ footer {
   .side-link span { display: none; }
   .side-link { justify-content: center; padding: 12px; }
 }
+
+/* ---- Alert styling ---- */
+
+.card-alert {
+  border-color: #E2B8B8;
+  background: #FFF6F6;
+}
+
+.card-alert:hover { box-shadow: 0 4px 14px rgba(180, 40, 40, 0.10); }
+
+.alert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #C53030;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}

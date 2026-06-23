@@ -1,13 +1,16 @@
 import { supabase } from '@/lib/supabaseClient';
+import NewsCard from '@/components/NewsCard';
 
 async function getData() {
-  const [{ data: news }, { data: events }, { data: businesses }, { data: jobs }] = await Promise.all([
-    supabase.from('news_posts').select('*').order('published_at', { ascending: false }).limit(4),
+  const [{ data: alerts }, { data: regularNews }, { data: events }, { data: businesses }, { data: jobs }] = await Promise.all([
+    supabase.from('news_posts').select('*').eq('source_type', 'alert').order('published_at', { ascending: false }).limit(3),
+    supabase.from('news_posts').select('*').neq('source_type', 'alert').order('published_at', { ascending: false }).limit(4),
     supabase.from('events').select('*').order('event_date', { ascending: true }).limit(3),
     supabase.from('businesses').select('*').order('created_at', { ascending: false }).limit(3),
     supabase.from('jobs').select('*').order('created_at', { ascending: false }).limit(3),
   ]);
-  return { news: news || [], events: events || [], businesses: businesses || [], jobs: jobs || [] };
+  const news = [...(alerts || []), ...(regularNews || [])];
+  return { news, events: events || [], businesses: businesses || [], jobs: jobs || [] };
 }
 
 export const revalidate = 600; // refresh every 10 min
@@ -29,11 +32,7 @@ export default async function Home() {
           <div className="empty">No updates yet — check back this morning.</div>
         )}
         {news.map((post: any) => (
-          <div className="card" key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.summary}</p>
-            <div className="meta">{new Date(post.published_at).toLocaleDateString()}</div>
-          </div>
+          <NewsCard post={post} key={post.id} />
         ))}
       </section>
 
